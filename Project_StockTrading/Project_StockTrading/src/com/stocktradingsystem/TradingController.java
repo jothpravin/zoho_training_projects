@@ -121,7 +121,6 @@ public class TradingController
                     addHoldings(holding);
                     addTransaction(transaction);
                     updateAmount(currentAmount - totalAmount);
-                    new StockManager(tradingDAO.getStockCount());
                 }
                 else
                 {

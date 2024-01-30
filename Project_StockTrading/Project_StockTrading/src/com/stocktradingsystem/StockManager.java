@@ -4,25 +4,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Random;
 
-public class StockManager 
+public class StockManager extends Thread
 {
     private Connection con;
+    private int stockCount;
     public StockManager(int stockCount) 
     {
         // Initialize the connection when the StockManager is created
         con = ConnectionDB.getConnection();
-        Random random = new Random();
-        random.nextInt(100);
+        this.stockCount = stockCount;
         try
         {
             if(stockCount == 0)
             {
                 sampleStocks();
-            }
-            for(int i=1; i<=stockCount; i++)
-            {
-                increaseStockPrice(i, random.nextInt(30));
-                decreaseStockPrice(i, random.nextInt(10));
             }
         }
         catch(SQLException e)
@@ -30,6 +25,27 @@ public class StockManager
             e.printStackTrace();
         }
 
+    }
+
+    public void run()
+    {
+        Random random = new Random();
+        try
+        {
+            while(true)
+            {
+                for(int i=1; i<=stockCount; i++)
+                {
+                    increaseStockPrice(i, random.nextInt(2));
+                    decreaseStockPrice(i, random.nextInt(2));
+                }
+                Thread.sleep(5000);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void increaseStockPrice(int stockId, double percentageIncrease) throws SQLException 

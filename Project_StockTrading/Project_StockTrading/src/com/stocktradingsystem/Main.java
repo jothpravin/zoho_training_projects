@@ -19,6 +19,9 @@ public class Main
         TradingDAO tradingDAO = new TradingDAO();
         UserController userController = new UserController(userDAO, tradingDAO);
         TradingController tradingController = new TradingController(tradingDAO); 
+        StockManager stockManager = new StockManager(tradingDAO.getStockCount());
+        stockManager.setDaemon(true);
+        stockManager.start();
         while(true)
 		{
 			System.out.println(ANSI_BULE+"------------------------------------------------------");

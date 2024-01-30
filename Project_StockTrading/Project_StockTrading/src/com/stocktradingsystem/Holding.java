@@ -92,8 +92,5 @@ public class Holding
     public Date getDate() 
     {
         return date;
-    }
-
-   
-    
+    } 
 }

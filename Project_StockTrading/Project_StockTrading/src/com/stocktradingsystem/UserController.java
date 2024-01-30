@@ -78,7 +78,6 @@ public class UserController
 		{
 			int userid = userDAO.login(email, pass);
 			tradingDAO.getTradingAccountId();
-			new StockManager(tradingDAO.getStockCount());
 			return userid;
 		}
 		return -1;
