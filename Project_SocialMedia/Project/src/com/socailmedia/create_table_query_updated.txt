@@ -1,0 +1,77 @@
+CREATE TYPE user_status AS ENUM ('online', 'offline');
+
+CREATE TYPE gender AS ENUM ('male', 'female');
+
+CREATE TABLE IF NOT EXISTS users (
+    userid SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    dob DATE,
+    bio TEXT,
+    status user_status DEFAULT 'offline'::user_status,
+    gender gender,
+    followers BIGINT,
+    following BIGINT,
+    joined DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+
+CREATE TABLE IF NOT EXISTS posts (
+    postid SERIAL PRIMARY KEY,
+    userid INTEGER,
+    content TEXT,
+    timestamp TIMESTAMP WITHOUT TIME ZONE,
+    views INTEGER DEFAULT 0,
+    
+    CONSTRAINT posts_userid_fkey FOREIGN KEY (userid) REFERENCES users(userid)
+);
+
+CREATE TABLE IF NOT EXISTS likes (
+    likeid SERIAL,
+    postid INTEGER NOT NULL,
+    userid INTEGER NOT NULL,
+    timestamp TIMESTAMP WITHOUT TIME ZONE,
+    
+    CONSTRAINT likes_id UNIQUE (likeid),
+    CONSTRAINT likes_new_pkey PRIMARY KEY (postid, userid),
+    
+    CONSTRAINT likes_postid_fkey FOREIGN KEY (postid) REFERENCES posts(postid),
+    CONSTRAINT likes_userid_fkey FOREIGN KEY (userid) REFERENCES users(userid)
+);
+
+
+CREATE TABLE IF NOT EXISTS comments (
+    commentid SERIAL PRIMARY KEY,
+    postid INTEGER,
+    userid INTEGER,
+    content TEXT,
+    timestamp TIMESTAMP WITHOUT TIME ZONE,
+    
+    CONSTRAINT comments_postid_fkey FOREIGN KEY (postid) REFERENCES posts(postid),
+    CONSTRAINT comments_userid_fkey FOREIGN KEY (userid) REFERENCES users(userid)
+);
+
+CREATE TABLE IF NOT EXISTS friends (
+    friendshipid SERIAL PRIMARY KEY,
+    userid1 INTEGER,
+    userid2 INTEGER,
+    status VARCHAR(10),
+    
+    CONSTRAINT friends_status_check CHECK (status IN ('pending', 'accepted', 'rejected')),
+    
+    CONSTRAINT friends_userid1_fkey FOREIGN KEY (userid1) REFERENCES users(userid),
+    CONSTRAINT friends_userid2_fkey FOREIGN KEY (userid2) REFERENCES users(userid)
+);
+
+CREATE TABLE IF NOT EXISTS chatmessages (
+    messageid SERIAL PRIMARY KEY,
+    senderid INTEGER,
+    receiverid INTEGER,
+    content TEXT,
+    timestamp TIMESTAMP WITHOUT TIME ZONE,
+    
+    
+    CONSTRAINT chatmessages_senderid_fkey FOREIGN KEY (senderid) REFERENCES users(userid),
+    CONSTRAINT chatmessages_receiverid_fkey FOREIGN KEY (receiverid) REFERENCES users(userid)
+);

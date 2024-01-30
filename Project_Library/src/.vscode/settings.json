@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/zoho/Downloads/postgresql-42.7.1.jar"
+    ]
+}

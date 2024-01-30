@@ -1,0 +1,6 @@
+package socailmedia;
+
+interface UserProcess
+{
+
+}

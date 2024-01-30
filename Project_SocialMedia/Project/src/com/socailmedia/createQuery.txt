@@ -1,0 +1,49 @@
+CREATE TYPE user_status AS ENUM ('online', 'offline');
+
+CREATE TABLE Users (
+    userID SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    dob DATE,
+    bio TEXT,
+    status user_status DEFAULT 'offline'
+);
+
+CREATE TABLE Posts (
+    postID SERIAL PRIMARY KEY,
+    userID INT,
+    content TEXT,
+    timestamp TIMESTAMP,
+    views INT DEFAULT 0,
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Comments (
+    commentID SERIAL PRIMARY KEY,
+    postID INT,
+    userID INT,
+    content TEXT,
+    timestamp TIMESTAMP,
+    FOREIGN KEY (postID) REFERENCES Posts(postID),
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Likes (
+    likeID SERIAL PRIMARY KEY,
+    postID INT,
+    userID INT,
+    timestamp TIMESTAMP,
+    FOREIGN KEY (postID) REFERENCES Posts(postID),
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE ChatMessages (
+    messageID SERIAL PRIMARY KEY,
+    senderID INT,
+    receiverID INT,
+    content TEXT,
+    timestamp TIMESTAMP,
+    FOREIGN KEY (senderID) REFERENCES Users(userID),
+    FOREIGN KEY (receiverID) REFERENCES Users(userID)
+);
