@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.io.Console;
 
-public class UserController 
+public class UserController implements CredentialProcess
 {
     static Scanner in = new Scanner(System.in);
     static Console con = System.console();

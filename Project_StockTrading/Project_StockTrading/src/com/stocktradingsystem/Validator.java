@@ -16,7 +16,7 @@ public class Validator
 	}
 
 	public static boolean isValidPassword(String password)
-    {
+      {
  
         String regex = "^(?=.*[0-9])"
                        + "(?=.*[a-z])(?=.*[A-Z])"
@@ -31,7 +31,7 @@ public class Validator
         }
         Matcher m = p.matcher(password);
         return m.matches();
-    }
+      }
 
     public static boolean isValidPan(String pan)
     {

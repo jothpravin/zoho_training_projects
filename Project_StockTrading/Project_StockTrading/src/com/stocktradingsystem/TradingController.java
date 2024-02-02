@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
-public class TradingController 
+public class TradingController implements TradingProcess
 {
     static Scanner in = new Scanner(System.in);
     static SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -58,9 +58,7 @@ public class TradingController
         for(Stock stock: stocks)
         {
             System.out.println("===========================");
-            System.out.println("Stock ID: "+stock.getStockId());
-            System.out.println("Stock Name: "+stock.getStockName());
-            System.out.println("Stock Price: "+ANSI_GREEN+stock.getPrice()+ANSI_RESET);
+            System.out.println(stock);
         }
         System.out.println("===========================");   
     }
@@ -178,7 +176,7 @@ public class TradingController
                     updateQuantitySelled(holding.getQuantitySelled() + quantity, holdid);
                     currentProfit = currentStockAmount + currentTradingAmount;
                     updateAmount(currentProfit);
-                    updateStockAmount(holding.getAmount() - userCurrentStockAmount, holdid);
+                    updateStockAmount(Math.abs(holding.getAmount() - userCurrentStockAmount), holdid);
                     holding.setQuantity(quantity);
                     holding.setAmount(currentStockAmount);
                     holding.setPrice(currentPrice(holding.getStockId()));
@@ -193,7 +191,7 @@ public class TradingController
                     updateQuantitySelled(holding.getQuantitySelled() + quantity, holdid);
                     currentProfit = currentStockAmount - userCurrentStockAmount + currentTradingAmount;
                     updateAmount(currentProfit);
-                    updateStockAmount(userCurrentStockAmount - holding.getAmount(), holdid);
+                    updateStockAmount(Math.abs(userCurrentStockAmount - holding.getAmount()), holdid);
                     holding.setQuantity(quantity);
                     holding.setAmount(currentStockAmount);
                     holding.setPrice(currentPrice(holding.getStockId()));

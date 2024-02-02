@@ -96,7 +96,7 @@ public class CustomerView
 
     public int getProductInput()
     {
-        System.out.print("Enter the Product Id : ");
+        System.out.print("Enter the Product Id (0 to back): ");
         return in.nextInt();
     }
 

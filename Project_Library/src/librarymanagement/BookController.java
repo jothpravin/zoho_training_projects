@@ -3,7 +3,7 @@ package librarymanagement;
 import java.util.List;
 import java.util.Scanner;
 
-public class BookController 
+public class BookController implements BookProcess
 {
     static Scanner in = new Scanner(System.in);
 
@@ -42,7 +42,7 @@ public class BookController
         System.out.println("------------------------------------------------");
         for(Publisher publisher: publishers)
         {
-            System.out.println("Publisher ID:"+publisher.getPublisherID()+"  Publisher Name :"+publisher.getPublisherName());
+            System.out.println(publisher);
         }
         System.out.println("------------------------------------------------");
     }
@@ -54,7 +54,7 @@ public class BookController
         System.out.println("------------------------------------------------");
         for(Rack rack: racks)
         {
-            System.out.println("Rack ID: "+rack.getRackID()+"   Rack Name: "+rack.getRackName());
+            System.out.println(rack);
         }
         System.out.println("------------------------------------------------");
     }
@@ -85,8 +85,12 @@ public class BookController
     public void sendBookReserveRequest()
     {
         getBooksByRack();
-        System.out.print("Enter the Book id to reserve: ");
+        System.out.print("Enter the Book id to reserve(0 to back): ");
         int bookid = in.nextInt();
+        if(bookid==0)
+        {
+            return;
+        }
         bookDAO.setBookReservation(UserDAO.USERID, bookid);
     }
 

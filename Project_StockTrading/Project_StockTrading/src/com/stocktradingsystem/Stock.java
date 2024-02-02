@@ -28,4 +28,9 @@ public class Stock
     {
         return price;
     }
+
+    public String toString()
+    {
+        return "Stock Id :"+stockId+"\n"+"Stock Name :"+stockName+"\n"+"Stock Price :"+price;
+    }
 }

@@ -26,5 +26,10 @@ public class Rack
         return rackName;
     }
 
+    public String toString()
+    {
+        return "Rack ID: "+rackID+"   Rack Name: "+rackName;
+    }
+
     
 }

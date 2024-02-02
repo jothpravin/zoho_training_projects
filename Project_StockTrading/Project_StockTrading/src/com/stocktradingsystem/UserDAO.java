@@ -62,18 +62,6 @@ public class UserDAO
         return -1;
     }
 
-    public void logout()
-    {
-        try
-        {
-            con.close();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     public User getUser(int userid)
     {
         String query = "SELECT * FROM users WHERE userid = ?";

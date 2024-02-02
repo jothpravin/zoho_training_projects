@@ -25,5 +25,10 @@ public class Publisher
     {
         return publisherName;
     }
+
+    public String toString()
+    {
+        return "Publisher ID:"+publisherID+"  Publisher Name :"+publisherName;
+    }
     
 }

@@ -11,7 +11,7 @@ import ecommerence.models.Order;
 import ecommerence.models.Product;
 import ecommerence.view.CustomerView;
 
-public class CustomerController 
+public class CustomerController implements CustomerProcess
 {
     private CustomerDAO customerDAO;
     private CustomerView customerView;
@@ -66,6 +66,10 @@ public class CustomerController
     {
         showProducts();
         int productId = customerView.getProductInput();
+        if(productId==0)
+        {
+            return;
+        }
         Product product = customerDAO.getProduct(productId);
         if(product != null)
         {

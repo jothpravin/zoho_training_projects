@@ -97,7 +97,7 @@ public class Main
                     break;
 
                 case 2:
-                    userController.SignUp();
+                    userController.signUp();
                     break;
 
                 case 3:

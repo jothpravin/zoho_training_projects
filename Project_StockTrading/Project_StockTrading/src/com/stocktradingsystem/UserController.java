@@ -5,19 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class UserController 
+public class UserController implements UserProcess
 {
     static Scanner in = new Scanner(System.in);
     static Console con = System.console();
     private UserDAO userDAO;
-	private TradingDAO tradingDAO;
+    private TradingDAO tradingDAO;
     public UserController(UserDAO userDAO, TradingDAO tradingDAO)
     {
         this.userDAO = userDAO;
 		this.tradingDAO = tradingDAO;
     }
 
-    public void SignUp()
+    public void signUp()
     {
         try
 		{
@@ -66,7 +66,6 @@ public class UserController
 			e.printStackTrace();
 		}
     }
-
     public int login()
     {
         System.out.print("Enter the Email ID: ");
@@ -85,7 +84,6 @@ public class UserController
 
     public boolean logout() 
     {
-		userDAO.logout();
         System.out.println("Logging out !!");
         return true;
     }
@@ -95,7 +93,7 @@ public class UserController
 		return userDAO.getUser(userid).getFirstName();
 	}
 
-	public void profile()
+	public void profile() 
     {
 		User user = userDAO.getUser(UserDAO.USERID);
 		TradingAccount tradingAccount = tradingDAO.getTradingAccount();
