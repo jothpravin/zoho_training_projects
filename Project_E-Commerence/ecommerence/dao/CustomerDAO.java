@@ -118,7 +118,7 @@ public class CustomerDAO
 	public List<String> getAllProducts()
 	{
 		String query = "SELECT p.*, c.category_name, m.companyname FROM products AS p JOIN category AS c ON p.categoryid = c.categoryid "+
-						"JOIN merchant AS m ON p.merchantid = m.merchantid";
+						"JOIN merchant AS m ON p.merchantid = m.merchantid ORDER BY p.productid";
 		List<String> products = new ArrayList<>();
 		try(PreparedStatement ps = con.prepareStatement(query))
 		{
