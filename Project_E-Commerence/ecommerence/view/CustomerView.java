@@ -200,7 +200,7 @@ public class CustomerView
 
     private boolean showOrders(List<String> orders)
     {
-        if(orders.isEmpty())
+        if(orders.isEmpty() || orders == null)
         {
             return false;
         }

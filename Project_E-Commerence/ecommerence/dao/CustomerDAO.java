@@ -490,7 +490,7 @@ public class CustomerDAO
 	{
 		String query = "SELECT o.*, m.companyname, a.* FROM ordertable AS o JOIN merchant AS m ON o.merchantid = m.merchantid "+
 						" JOIN address AS a ON a.addressid = o.addressid"+
-						" WHERE o.d_status = 'Delivered' AND o.customerid = ?";
+						" WHERE o.d_status = 'Delivered' AND o.customerid = ? AND CURRENT_DATE - o.delivery_date <= 14";
 		List<String> orders = new ArrayList<>();
 		try(PreparedStatement ps = con.prepareStatement(query))
 		{
