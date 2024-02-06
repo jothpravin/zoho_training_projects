@@ -7,8 +7,9 @@ public class Validator
 {
 	public static boolean emailValidator(String email)
 	{
-		String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@ [^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-        	
+		String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" 
+        					+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+                            
         	Pattern p = Pattern.compile(regexPattern);
         	Matcher matcher = p.matcher(email);
     		return matcher.matches();

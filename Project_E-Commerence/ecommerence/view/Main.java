@@ -1,5 +1,6 @@
 package ecommerence.view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ecommerence.controller.CustomerController;
@@ -27,9 +28,9 @@ public class Main
         MerchantDAO merchantDAO = new MerchantDAO();
         MerchantView merchantView = new MerchantView();
         MerchantController merchantController = new MerchantController(merchantDAO, merchantView);
-        try
+        while(true)
         {
-            while(true)
+            try
             {
                 System.out.println(ANSI_BULE+"------------------------------------------------------");
                 System.out.println("| Option |            Description                    |");
@@ -40,7 +41,7 @@ public class Main
                 System.out.println("|   4    | Merchant SignUp                           |");
                 System.out.println("|   5    | Exit                                      |");
                 System.out.println("------------------------------------------------------"+ANSI_RESET);
-    
+
                 System.out.print(ANSI_YELLOW+"Enter the Option to perform :"+ANSI_RESET);	
                 int n = in.nextInt();
                 switch(n)
@@ -99,7 +100,7 @@ public class Main
                                         logout = customerController.logout();
                                         System.out.println("Logging Out...!");
                                         break;
-    
+
                                     default:
                                         System.out.println("Enter the correct option to perform..");
                                         break;
@@ -111,11 +112,11 @@ public class Main
                             System.out.println("Invalid Credentials....!");
                         }
                         break;
-    
+
                     case 2:
                         customerController.signUp();
                         break;
-    
+
                     case 3:
                         int loginMerchan = merchantController.login();
                         boolean logoutMerchan = false;
@@ -176,26 +177,26 @@ public class Main
                             System.out.println("Invalid Credentials");
                         }
                         break;
-    
+
                     case 4:
                         merchantController.signUp();
                         break;
-    
+
                     case 5:
                         customerController.logout();
                         System.out.println("Application exiting..!");
                         System.exit(0);
-    
+
                     default:
                         System.out.println("Enter the correct option to perform..");
                         break;
                 }
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println(e.getMessage());
             } 
-        }
-        catch(Exception e)
-        {
-            System.out.println("Enter the correct input");
-        }
+        } 
           
     }
 }
